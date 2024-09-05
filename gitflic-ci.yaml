@@ -1,0 +1,38 @@
+# Данный файл - шаблонная конфигурация CI/CD конвейера. Он может быть изменен по Вашему усмотрению. 
+# Некоторые шаблоны требуют предварительной настройки перед запуском.
+#
+# Подробнее о синтаксисе можно узнать в документации:
+# https://docs.gitflic.space/cicd/gitflic-ci-yaml
+
+image: python:latest
+
+cache:
+  paths:
+    - .cache/pip
+
+before_script:
+  - python --version ; pip --version
+  - pip install virtualenv
+  - virtualenv venv
+  - . venv/bin/activate
+
+test:
+  stage: test
+  script:
+    - pip install ruff tox
+    - pip install --editable ".[test]"
+    - tox -e py,ruff
+
+run:
+  stage: build
+  script:
+    - python3 hello.py
+  artifacts:
+    paths:
+      - build/*
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+
+deploy:
+  stage: deploy
+  script: echo "Развертывание проекта"
