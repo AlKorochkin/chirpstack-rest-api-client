@@ -6,8 +6,10 @@ from pydantic import BaseModel, HttpUrl, UUID4
 
 
 class Application(BaseModel):
-    description: Optional[str] = None # Application description.
-    id: Optional[UUID4] = None # Application ID (UUID).Note: on create this will be automatically generated.
+    description: Optional[str] = None  # Application description.
+    id: Optional[UUID4] = (
+        None  # Application ID (UUID).Note: on create this will be automatically generated.
+    )
     name: str  # Application name.
     tags: Optional[dict[str, str]] = {}
     tenantId: UUID4  # Tenant ID (UUID).

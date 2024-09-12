@@ -36,7 +36,7 @@ class ListDevicesResponse(BaseModel):
 
 class Device(BaseModel):
     applicationId: UUID4  # Application ID (UUID).
-    description: Optional[str] = None # Description.
+    description: Optional[str] = None  # Description.
     devEui: str  # DevEUI (EUI64).
     deviceProfileId: UUID4  # Device-profile ID (UUID).
     isDisabled: bool = False  # Device is disabled.
@@ -81,8 +81,10 @@ class DeviceActivation(BaseModel):
     # network session integrity key fields with the LoRaWAN 1.0.x 'NwkSKey`!
     sNwkSIntKey: str  # Serving network session integrity key (HEX encoded)
 
+
 class DeviceActivationRequest(BaseModel):
     deviceActivation: DeviceActivation
+
 
 class CommonKeyEnvelope(BaseModel):
     aesKey: bytes  # AES key (when the kek_label is set, this value must first be decrypted).

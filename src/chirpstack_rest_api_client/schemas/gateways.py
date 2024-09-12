@@ -16,10 +16,10 @@ class CommonLocationSourceEnum(str, Enum):
 
 
 class CommonLocation(BaseModel):
-    accuracy: float  = 0.0  # Accuracy.
-    altitude: float  = 0.0 # Altitude.
-    latitude: float  = 0.0 # Latitude.
-    longitude: float  = 0.0 # Longitude.
+    accuracy: float = 0.0  # Accuracy.
+    altitude: float = 0.0  # Altitude.
+    latitude: float = 0.0  # Latitude.
+    longitude: float = 0.0  # Longitude.
     source: CommonLocationSourceEnum = CommonLocationSourceEnum.gps
 
 
@@ -49,11 +49,13 @@ class ListGatewaysResponse(BaseModel):
 
 class Gateway(BaseModel):
     description: Optional[str] = None  # Description.
-    gatewayId: str # Gateway ID (EUI64).
+    gatewayId: str  # Gateway ID (EUI64).
     location: CommonLocation
     metadata: Optional[dict[str, str]] = {}
     name: str  # Name.
-    statsInterval: int  = 10 # Stats interval (seconds). This defines the expected interval in which the gateway sends its statistics.
+    statsInterval: int = (
+        10  # Stats interval (seconds). This defines the expected interval in which the gateway sends its statistics.
+    )
     tags: Optional[dict[str, str]] = {}
     tenantId: UUID4  # Tenant ID (UUID).
 
@@ -65,5 +67,5 @@ class CreateGatewayRequest(BaseModel):
 class GetGatewayResponse(BaseModel):
     createdAt: datetime  # Created at timestamp.
     gateway: Gateway
-    lastSeenAt: Optional[datetime] # Last seen at timestamp.
+    lastSeenAt: Optional[datetime]  # Last seen at timestamp.
     updatedAt: datetime  # Last update timestamp.

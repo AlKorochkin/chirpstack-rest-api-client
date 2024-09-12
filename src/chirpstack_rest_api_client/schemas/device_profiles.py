@@ -121,7 +121,9 @@ class DeviceProfile(BaseModel):
     deviceStatusReqInterval: int = 1  # Device-status request interval (times / day).
     # This defines the times per day that ChirpStack will request the device-status from the device.
     flushQueueOnActivate: bool = True  # Flush queue on device activation.
-    id: Optional[UUID4] = None  # Device-profile ID (UUID). Note: on create this will be automatically generated.
+    id: Optional[UUID4] = (
+        None  # Device-profile ID (UUID). Note: on create this will be automatically generated.
+    )
     isRelay: bool = False  # Device is a Relay device.
     # Enable this in case the device is a Relay. A Relay device implements TS011
     # and is able to relay data from relay capable devices. See for more information the TS011 specification.
@@ -133,7 +135,7 @@ class DeviceProfile(BaseModel):
     )  # default: LORAWAN_1_0_0
     measurements: Optional[dict[str, str]] = {}
     name: str  # Name.
-    payloadCodecRuntime: CodecRuntimesEnum = CodecRuntimesEnum.none # default: NONE
+    payloadCodecRuntime: CodecRuntimesEnum = CodecRuntimesEnum.none  # default: NONE
     payloadCodecScript: str = (
         "/**\n * Decode uplink function\n * \n * @param {object} input\n * @param {number[]} input.bytes Byte array containing the uplink payload, e.g. [255, 230, 255, 0]\n * @param {number} input.fPort Uplink fPort.\n * @param {Record<string, string>} input.variables Object containing the configured device variables.\n * \n * @returns {{data: object}} Object representing the decoded payload.\n */\nfunction decodeUplink(input) {\n  return {\n    data: {\n      // temp: 22.5\n    }\n  };\n}\n\n/**\n * Encode downlink function.\n * \n * @param {object} input\n * @param {object} input.data Object representing the payload that must be encoded.\n * @param {Record<string, string>} input.variables Object containing the configured device variables.\n * \n * @returns {{bytes: number[]}} Byte array containing the downlink payload.\n */\nfunction encodeDownlink(input) {\n  return {\n    // bytes: [225, 230, 255, 0]\n  };\n}\n"
     )
@@ -148,7 +150,9 @@ class DeviceProfile(BaseModel):
     relayCadPeriodicity: CadPeriodicityEnum = CadPeriodicityEnum.sec_1  # default: SEC_1
     relayDefaultChannelIndex: int = 0  # Relay default channel index.
     # Valid values are 0 and 1, please refer to the RP002 specification for the meaning of these values.
-    relayEdActivationMode: RelayModeActivationEnum = RelayModeActivationEnum.disable_relay_mode  # default: DISABLE_RELAY_MODE
+    relayEdActivationMode: RelayModeActivationEnum = (
+        RelayModeActivationEnum.disable_relay_mode
+    )  # default: DISABLE_RELAY_MODE
 
     relayEdBackOff: int = (
         0  # Relay end-device back-off (in case it does not receive WOR ACK frame).

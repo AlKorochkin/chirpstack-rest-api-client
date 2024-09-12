@@ -24,8 +24,14 @@ class GatewayClient(ChirpstackAPIClientBase):
         )
         resp.raise_for_status()
 
-    async def get_gateways(self, limit: int = 1000, offset: Optional[int] = None,
-    search: Optional[str] = None, tenant_id: Optional[UUID4] = None, multicast_group: Optional[UUID4] = None) -> Optional[ListGatewaysResponse]:
+    async def get_gateways(
+        self,
+        limit: int = 1000,
+        offset: Optional[int] = None,
+        search: Optional[str] = None,
+        tenant_id: Optional[UUID4] = None,
+        multicast_group: Optional[UUID4] = None,
+    ) -> Optional[ListGatewaysResponse]:
         """
         Get a gateways list.
         """
@@ -36,7 +42,7 @@ class GatewayClient(ChirpstackAPIClientBase):
             tenantId=tenant_id,
             multicastGroupId=multicast_group,
         ).model_dump(exclude_none=True)
-        resp = await self.get(url="/api/gateways",params=params)
+        resp = await self.get(url="/api/gateways", params=params)
         resp.raise_for_status()
         try:
             gateways_model = ListGatewaysResponse.model_validate(resp.json())
@@ -52,11 +58,12 @@ class GatewayClient(ChirpstackAPIClientBase):
         """
         resp = await self.get(f"/api/gateways/{gateway_id}")
         resp.raise_for_status()
-        #try:
+        # try:
         gateway_model = GetGatewayResponse.model_validate(resp.json())
         return gateway_model
-       # except ValidationError:
-         #   logger.error(f"Invalid gateway response from ChirpStack: {resp.json()}")
+
+    # except ValidationError:
+    #   logger.error(f"Invalid gateway response from ChirpStack: {resp.json()}")
 
     async def delete_gateway_by_id(self, gateway_id: UUID4) -> None:
         """
