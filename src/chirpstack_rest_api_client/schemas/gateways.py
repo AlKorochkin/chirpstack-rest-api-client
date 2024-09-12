@@ -43,8 +43,14 @@ class GatewayListItem(BaseModel):
 
 
 class ListGatewaysResponse(BaseModel):
-    result: List[Optional[GatewayListItem]]
+    result: List[GatewayListItem]
     totalCount: int
+
+    def gw_list_to_dict(self) -> dict:
+        """
+        Convert a list of gateways objects to a dictionary with gateway id as key.
+        """
+        return {gw.model_dump()["gatewayId"]: gw for gw in self.result}
 
 
 class Gateway(BaseModel):
