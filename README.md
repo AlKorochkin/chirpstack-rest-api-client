@@ -1,6 +1,6 @@
 # Chirpstack REST API client
 
-The client for the Chirpstack REST API based on https and pydantic.
+The client for the Chirpstack REST API based on httpx and pydantic.
 
 It contains ready-made clients with implemented methods and pedantic schemes for the following services:
 - TenantService
