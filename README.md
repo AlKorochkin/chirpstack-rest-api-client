@@ -2,7 +2,7 @@
 
 The client for the Chirpstack REST API based on httpx and pydantic.
 
-It contains ready-made clients with implemented methods and pedantic schemes for the following services:
+It contains ready-made clients with implemented methods and pydantic schemes for the following services:
 - TenantService
 - GatewayService
 - DeviceService
