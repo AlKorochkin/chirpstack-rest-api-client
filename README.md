@@ -1,21 +1,21 @@
-# chirpstack-rest-api-client
+# Chirpstack REST API client
 
-Клиент для обращения к REST API Chirpstack на основе httpx и pydantic.
+The client for the Chirpstack REST API based on https and pydantic.
 
-Содержит готовые клиенты с реализованными методами и pydantic-схемы для следующих сервисов:
+It contains ready-made clients with implemented methods and pedantic schemes for the following services:
 - TenantService
 - GatewayService
 - DeviceService
 - DeviceProfileService
 - ApplicationService
 
-Установка:
+Installing:
 
 ```
 pip install chirpstack-rest-api-client
 ```
 
-Пример использования:
+Usage example:
 
 ```python
 from chirpstack_rest_api_client.services.tenants import TenantClient
@@ -35,3 +35,6 @@ if __name__ == "__main__":
 
     asyncio.run(run())        
 ```
+
+### License
+[Apache License, Version 2.0](https://github.com/AlKorochkin/chirpstack-rest-api-client/blob/main/LICENSE)
