@@ -22,6 +22,10 @@ async def test_gateway_api(gateway_client: GatewayClient, get_default_tenant_id)
     # get gateways list
     response_get_gateways = await gateway_client.get_gateways()
     assert response_get_gateways.totalCount >= 1
+    # convert to dict for easier access
+    gws = response_get_gateways.gw_list_to_dict()
+    assert type(gws) == dict
+    assert gws[gateway_id].name == "TestGateway"
     # get gateway by id
     response_get_gateway = await gateway_client.get_gateway_by_id(gateway_id)
     assert response_get_gateway.gateway.gatewayId == gateway_id
